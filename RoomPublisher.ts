@@ -1,11 +1,11 @@
-///<reference path="PublishOperation.ts"/>
+///<reference path="operations/PublishOperation.ts"/>
 declare var Janus:any;
-class Publisher {
+class RoomPublisher {
     
     private j$:any;
     private janus:any;
     private pluginPublisherInitData:any;
-    private publisherUserId:string;
+    private publisherUserId:number;
     private plugin:any;
     
     private myStream:any;
@@ -17,16 +17,29 @@ class Publisher {
     private selfStreamId:string;
     private userId:number;
     private streamId:string;
+    private selfVideoElement:any;
     
-    constructor(j$:any, janus:any, userId:string, streamId:string) {
+    constructor(j$:any, janus:any, userId:number, room:number, streamId:string, selfVideoElement:any) {
+        console.log("new RoomPublisher");
+        this.j$ = j$;
         this.janus = janus;
         this.publisherUserId = userId;
         this.streamId = streamId;
+        this.room = room;
+        this.selfVideoElement = selfVideoElement;
+
+        console.log("this.publisherUserId=",this.publisherUserId);
+        console.log("this.streamId=",this.streamId);
+        console.log("this.room=",this.room);
         this.attachPlugin();
     }
 
     private attachPlugin():void {
+        console.log("attachPlugin");
         this.buildPublisherPluginInitData();
+
+        console.log("this.pluginPublisherInitData=",this.pluginPublisherInitData);
+
         this.janus.attach(this.pluginPublisherInitData);
     }
 
@@ -68,10 +81,8 @@ class Publisher {
 
         this.addInfo(" ::: Got a local stream ::: "+JSON.stringify({id:stream.id, active:stream.active}));
 
-        var selfVideoHtmlElement:any = this.j$('#selfVideo').get(0);
-
-        this.appendSelfCamera(selfVideoHtmlElement);
-        this.startSelfCamera(selfVideoHtmlElement);
+        this.appendSelfCamera();
+        this.startSelfCamera();
     }
 
     private onPublisherPluginMessage(msg:any, jsep:any):void {
@@ -109,12 +120,12 @@ class Publisher {
         this.plugin.send(this.newRoomData);
     }
     
-    private appendSelfCamera(selfVideoHtmlElement:any):void {
-        Janus.attachMediaStream(selfVideoHtmlElement, this.myStream); // append local media to video tag
-        selfVideoHtmlElement.muted = "muted";
+    private appendSelfCamera():void {
+        Janus.attachMediaStream(this.selfVideoElement, this.myStream); // append local media to video tag
+        this.selfVideoElement.muted = "muted";
     }
-    private startSelfCamera(selfVideoHtmlElement:any):void {
-        selfVideoHtmlElement.play();
+    private startSelfCamera():void {
+        this.selfVideoElement.play();
     }
 
     private createPublisherRoomPluginData():void{
@@ -157,14 +168,16 @@ class Publisher {
     private joinRoomByPublisher():void{
         console.log("joining room by publisher");
         var register = {
-            request: "join",
-            room: +this.room,
-            ptype: "publisher",
-            display: this.selfStreamId
+            message:{
+                request: "join",
+                room: +this.room,
+                ptype: "publisher",
+                display: this.selfStreamId
+            }
         };
 
         console.log("register=",register);
-        this.plugin.send({ message: register });
+        this.plugin.send(register);
     }
     
     

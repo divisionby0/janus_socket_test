@@ -34,3 +34,7 @@ navigator.sayswho= (function(){
     if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
     return M.join(' ');
 })();
+
+function isVideoSupported(){
+   return !!document.createElement('video').canPlayType;
+}

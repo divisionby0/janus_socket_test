@@ -4,27 +4,48 @@
     <title>Janus socket connection test</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0">
+    <style>
+        /*
+        video::-webkit-media-controls {
+            display: none; }
+
+        video::-webkit-media-controls-play-button {
+            display: none; }
+
+        video::-webkit-media-controls-volume-slider {
+            display: none; }
+
+        video::-webkit-media-controls-mute-button {
+            display: none; }
+
+        video::-webkit-media-controls-timeline {
+            display: none; }
+
+        video::-webkit-media-controls-current-time-display {
+            display: none; }
+            */
+    </style>
 </head>
 <body>
 
 <div id="roleElement" style="width: 100%; height: 50px; display: block; float: left; font-size: 1.6em;"></div>
 
 <div style="width: 100%; height: 50px; display: block; float: left;">
-    <div id="isMobileInfo" style="width: 50%; height: 100%; display: block; float: left; color: darkblue">
+    <div id="isMobileInfo" style="width: 45%; height: 100%; display: block; float: left; color: darkblue">
 
     </div>
-    <div id="browserInfo" style="width: 50%; height: 100%; display: block; float: left; color: darkgreen">
+    <div id="browserInfo" style="width: 45%; height: 100%; display: block; float: left; color: darkgreen">
 
     </div>
 </div>
 
 <div style="width: 100%; display: block; float: left;">
     <div style="width: 50%; display: block; float: left;">
-        <video id="selfVideo" style="width: 250px;"></video>
+        <video id="selfVideo" style="width: 100%;"></video>
     </div>
 
     <div style="width: 50%; display: block; float: left;">
-        <video id="remoteVideo" style="width: 250px;" controls autoplay playsinline></video>
+        <video id="remoteVideo" style="width: 100%;" autoplay playsinline></video>
     </div>
 </div>
 <div id="errorContainer" style="display: block; float:left; width: 100%; color: red; min-height: 10px;">
@@ -46,5 +67,8 @@
 <script type="application/javascript" src="BrowserUtil.js"></script>
 <script type="application/javascript" src="index.js"></script>
 <script type="application/javascript" src="Application.js"></script>
+<script type="application/javascript" src="RoomPublisher.js"></script>
+<script type="application/javascript" src="RoomSubscriber.js"></script>
 <script type="application/javascript" src="operations/PublishOperation.js"></script>
+<script type="application/javascript" src="VideoView.js"></script>
 </html>
