@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Janus socket connection test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0">
+</head>
+<body>
+
+<div id="roleElement" style="width: 100%; height: 50px; display: block; float: left; font-size: 1.6em;"></div>
+
+<div style="width: 100%; height: 50px; display: block; float: left;">
+    <div id="isMobileInfo" style="width: 50%; height: 100%; display: block; float: left; color: darkblue">
+
+    </div>
+    <div id="browserInfo" style="width: 50%; height: 100%; display: block; float: left; color: darkgreen">
+
+    </div>
+</div>
+
+<div style="width: 100%; display: block; float: left;">
+    <div style="width: 50%; display: block; float: left;">
+        <video id="selfVideo" style="width: 250px;"></video>
+    </div>
+
+    <div style="width: 50%; display: block; float: left;">
+        <video id="remoteVideo" style="width: 250px;" controls autoplay playsinline></video>
+    </div>
+</div>
+<div id="errorContainer" style="display: block; float:left; width: 100%; color: red; min-height: 10px;">
+
+</div>
+<div id="infoContainer" style="display: block; float:left; width: 100%; color: blue; background-color: antiquewhite; min-height: 20px; padding: 5px;">
+
+</div>
+
+</body>
+<script type="application/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"> </script>
+<script type="application/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"> </script>
+<script type="application/javascript" src="lib/janus.js"></script>
+<script type="application/javascript" src="lib/collections/KeyMap.js"></script>
+<script type="application/javascript" src="lib/collections/List.js"></script>
+<script type="application/javascript" src="lib/collections/iterators/KeyMapIterator.js"></script>
+<script type="application/javascript" src="lib/collections/iterators/ListIterator.js"></script>
+<script type="application/javascript" src="lib/events/EventBus.js"></script>
+<script type="application/javascript" src="BrowserUtil.js"></script>
+<script type="application/javascript" src="index.js"></script>
+<script type="application/javascript" src="Application.js"></script>
+<script type="application/javascript" src="operations/PublishOperation.js"></script>
+</html>
